@@ -17,13 +17,15 @@ namespace net
 		}
 
 		ipv4_addr ip{};
-		for (size_t i = 0; i < octets.size(); i++) {  
-			int byte = std::stoi(octets[i]);  
-			if (byte < 0 || byte > 255) {  
+		for (size_t i = 0; i < octets.size(); i++)
+		{  
+			int byte = std::stoi(octets[i]);
+			if (byte < 0 || byte > 255)
+			{  
 				throw std::invalid_argument("Invalid IPv4 address");  
-			}  
+			}
 			ip.bytes[i] = static_cast<uint8_t>(byte);  
-		} 
+		}
 
 		return ip;
 	}
@@ -47,8 +49,15 @@ namespace net
 
 	std::istream& operator>>(std::istream& is, ipv4_addr& ip)
 	{
-		std::string ip_str;
+        std::string ip_str;  
 		is >> ip_str;
+									
+		if (ip_str.length() > 15 ||
+			std::count(ip_str.begin(), ip_str.end(), '.') != 3)  
+		{
+			throw std::invalid_argument("Invalid IPv4 address");  
+		}
+
 		ip = ipv4_addr::parse_from_str(ip_str);
 		return is;
 	}
