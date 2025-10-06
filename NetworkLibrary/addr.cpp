@@ -8,7 +8,7 @@
 namespace net
 {
 	ipv4_addr ipv4_addr::parse_from_str(std::string ip_str)
-	{  
+	{
 		std::vector<std::string> octets;
 		std::stringstream ss(ip_str);
 		std::string item;
@@ -21,7 +21,7 @@ namespace net
 		for (size_t i = 0; i < octets.size(); i++)
 		{  
 			int byte = std::stoi(octets[i]);
-			if (byte < 0 || byte > 255)
+			if (byte < 0 || byte > MAX_IPV4_OCTET_VAL)
 			{  
 				throw net::exception::invalid_ipv4_addr
 				(
@@ -57,7 +57,7 @@ namespace net
         std::string ip_str;
 		is >> ip_str;
 
-		if (ip_str.length() > 15 ||
+		if (ip_str.length() > MAX_IPV4_STR_LEN ||
 			std::count(ip_str.begin(), ip_str.end(), '.') != 3)  
 		{
 			throw net::exception::invalid_ipv4_addr(
