@@ -3,6 +3,7 @@
 #include <iostream>  
 #include <vector>  
 #include <sstream>
+#include "exceptions.h"
 
 namespace net
 {
@@ -22,7 +23,11 @@ namespace net
 			int byte = std::stoi(octets[i]);
 			if (byte < 0 || byte > 255)
 			{  
-				throw std::invalid_argument("Invalid IPv4 address");  
+				throw net::exception::invalid_ipv4_addr
+				(
+					"Invalid IPv4 format: excepted four "
+					"numeric octets separated by dots"
+				);
 			}
 			ip.bytes[i] = static_cast<uint8_t>(byte);  
 		}
@@ -49,13 +54,16 @@ namespace net
 
 	std::istream& operator>>(std::istream& is, ipv4_addr& ip)
 	{
-        std::string ip_str;  
+        std::string ip_str;
 		is >> ip_str;
-									
+
 		if (ip_str.length() > 15 ||
 			std::count(ip_str.begin(), ip_str.end(), '.') != 3)  
 		{
-			throw std::invalid_argument("Invalid IPv4 address");  
+			throw net::exception::invalid_ipv4_addr(
+				"Invalid IPv4 address: maximum "
+				"allowed length is 15 chars"
+			);
 		}
 
 		ip = ipv4_addr::parse_from_str(ip_str);

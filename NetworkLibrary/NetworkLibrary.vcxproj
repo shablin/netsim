@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="addr.h" />
+    <ClInclude Include="exceptions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="addr.cpp" />
