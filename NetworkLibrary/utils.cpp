@@ -18,14 +18,14 @@ namespace net
 			while (std::getline(ss, token, ipv4_sprt))
 			{
 				int byte = std::stoi(token);
-				if (byte < 0 || byte > MAX_IPV4_OCTET_VAL)
+				if (byte < 0 || byte > net::core::IPV4_MAX_OCTET_VAL)
 					throw net::exception::invalid_ipv4_addr(
 						"Invalid IPv4 format: segment out of range"
 					);
 				octets.push_back(static_cast<uint8_t>(byte));
 			}
 
-			if (octets.size() != MAX_IPV4_OCTETS)
+			if (octets.size() != net::core::IPV4_MAX_OCTETS)
 				throw net::exception::invalid_ipv4_addr(
 					"Invalid IPv4 format: excepted four "
 					"numeric octets separated by dots"
@@ -44,14 +44,14 @@ namespace net
 			while (std::getline(ss, token, mac_sprt))
 			{
 				int byte = std::stoi(token, nullptr, 16);
-				if (byte < 0 || byte > MAX_MAC_OCTET_VAL)
+				if (byte < 0 || byte > net::core::MAC_MAX_OCTET_VAL)
 					throw net::exception::invalid_mac_addr(
 						"Invalid MAC format: segment out of range"
 					);
 				octets.push_back(static_cast<uint8_t>(byte));
 			}
 
-			if (octets.size() != MAX_MAC_OCTETS)
+			if (octets.size() != net::core::MAC_MAX_OCTETS)
 				throw net::exception::invalid_mac_addr(
 					"Invalid MAC format: excepted six "
 					"hexadecimal octets separated by colons"

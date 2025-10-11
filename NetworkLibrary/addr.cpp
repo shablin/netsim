@@ -47,8 +47,9 @@ namespace net
 			std::string ip_str;
 			is >> ip_str;
 
-			if (ip_str.length() > MAX_IPV4_STR_LEN ||
-				std::count(ip_str.begin(), ip_str.end(), '.') != 3)  
+			if (ip_str.length() > IPV4_MAX_STR_LEN ||
+				std::count(ip_str.begin(), ip_str.end(), '.') !=
+				IPV4_MAX_SEPARATORS)
 			{
 				throw net::exception::invalid_ipv4_addr(
 					"Invalid IPv4 address: maximum "
@@ -102,8 +103,9 @@ namespace net
 			std::string mac_str;
 			is >> mac_str;
 
-			if (mac_str.length() > MAX_MAC_STR_LEN ||
-				std::count(mac_str.begin(), mac_str.end(), ':') != 5)
+			if (mac_str.length() > MAC_MAX_STR_LEN ||
+				std::count(mac_str.begin(), mac_str.end(), ':') !=
+				MAC_MAX_SEPARATORS)
 			{
 				throw net::exception::invalid_mac_addr(
 					"Invalid MAC address: maximum "

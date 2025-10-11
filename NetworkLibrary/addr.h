@@ -6,21 +6,22 @@ namespace net
 {
 	namespace core
 	{
-#define MAX_IPV4_STR_LEN 15
-#define MAX_MAC_STR_LEN 17
+		constexpr auto IPV4_MAX_STR_LEN = 15;
+		constexpr auto IPV4_MAX_OCTETS = 4;
+		constexpr auto IPV4_MAX_OCTET_VAL = 255;
+		constexpr auto IPV4_MAX_SEPARATORS = 3;
 
-#define MAX_IPV4_OCTETS 4
-#define MAX_MAC_OCTETS 6
-
-#define MAX_IPV4_OCTET_VAL 255
-#define MAX_MAC_OCTET_VAL 0xFF
+		constexpr auto MAC_MAX_STR_LEN = 17;
+		constexpr auto MAC_MAX_OCTETS = 6;
+		constexpr auto MAC_MAX_OCTET_VAL = 0xFF;
+		constexpr auto MAC_MAX_SEPARATORS = 5;
 
 		struct mac_addr {
-			uint8_t bytes[MAX_MAC_OCTETS]; // 48 bits (6 bytes)
+			uint8_t bytes[MAC_MAX_OCTETS]; // 48 bits (6 bytes)
 			static mac_addr parse_from_str(std::string mac_str);
 			std::string conv_to_str(mac_addr mac) const;
-			// bool operator==(const MacAddress& other) const;
-			// bool operator!=(const MacAddress& other) const;
+			// bool operator==(const mac_addr& other) const;
+			// bool operator!=(const mac_addr& other) const;
 		};
 
 		std::ostream& operator<<(std::ostream& os, const mac_addr& mac);
@@ -28,7 +29,7 @@ namespace net
 
 		struct ipv4_addr
 		{
-			uint8_t bytes[MAX_IPV4_OCTETS]; // 32 bits (4 bytes)
+			uint8_t bytes[IPV4_MAX_OCTETS]; // 32 bits (4 bytes)
 			static ipv4_addr parse_from_str(std::string ipv4_str);
 			std::string conv_to_str(ipv4_addr ip) const;
 			// bool operator==(const IPv4& other) const;
